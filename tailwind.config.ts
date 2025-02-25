@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        workSans: "var(--font-work-sans)",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
