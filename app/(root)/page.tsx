@@ -1,9 +1,22 @@
 import Image from "next/image";
 import SearchForm from "../../components/SearchForm";
+import StartupCard from "@/components/StartupCard";
 export default async function Home({searchParams}: {
   searchParams: Promise<{query?:string}>
 }) {
   const query = (await searchParams).query
+  const posts = [
+    {
+      _id: 1,
+      _createdAt : new Date,
+      title : "We robots",
+      views: 55,
+      author : {id:1, name: "john"},
+      descreption: "descreption of we rebots",
+      image : "https://www.shop4tesla.com/cdn/shop/articles/teslas-we-robot-event-cybercab-robovan-optimus-und-mehr-489531.jpg?v=1728680993",
+      category:"Robots",
+    }
+  ]
   return (
     <>
       <section className="pink_container text-white">
@@ -19,7 +32,11 @@ export default async function Home({searchParams}: {
           {query ? `Search results for " ${query} "` : 'All startups'}
         </p>
         <ul className="mt-7 card_grid">
-          
+          {posts?.length > 0 ? (
+            posts.map((post,index) => (
+              <StartupCard key={index} post={post}/>
+            )) 
+          ) : <p className="no-results"> No startups found </p>}
         </ul>
       </section>
     </>
